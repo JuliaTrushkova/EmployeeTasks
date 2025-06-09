@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="ru" ng-app="employeeApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
+    <script src="app.js"></script>
+    <script src="employeeservice.js"></script>
+    <script src="employeetask.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="custom.css" rel="stylesheet" />
+</head>
+<body>
+    <main class="table-width" ng-controller="TaskController">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end btn-newcolor">
+            <input type="text" class="me-md-2" ng-model="searchText" placeholder="Поиск">
+            <button type="button" class="btn btn-outline-secondary me-md-2" target="_blank" ng-click="logout()">Выйти из системы</button>
+        </div>
+
+        <table class="table table-hover table-striped caption-top" ng-show="isAuth()">
+            <caption>Список задач сотрудников</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Дата выполнения</th>
+                    <th scope="col">Описание задачи</th>
+                    <th scope="col">Время, затраченное на задачу</th>
+                    <th scope="col">Исполнитель задачи</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in filteredTasks track by task.id_EmployeeTask">
+                    <td>{{ task.DateCompleted }}</td>
+                    <td>{{ task.Description }}</td>
+                    <td>{{ task.TimeSpent }}</td>
+                    <td>{{ task.FIO_Employee }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Общая сумма затраченного времени: {{ totalTime }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button type="button" class="btn btn-primary btn-newcolor" data-bs-toggle="modal" data-bs-target="#exampleModal" ng-show="isAuth()">Добавить новую задачу</button>
+        <span ng-show="!!error" class="error-message">{{ error }}</span>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Новая задача</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="taskForm">
+                            <div class="form-group">
+                                <label class="col-form-label">Дата выполнения:</label>
+                                <input class="form-control" name="dateCompleted" ng-model="dateCompleted" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Сотрудник:</label>
+                                <input class="form-control" name="employee" ng-model="employee.fio" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Описание задачи:</label>
+                                <textarea type="text" class="form-control" name="description" ng-model="description" required></textarea>
+                                <span class="error-message" ng-show="taskForm.description.$touched && taskForm.description.$error.required">Описание обязательно</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Время, затраченное на задачу в формате чч:мм:</label>
+                                <input class="form-control" name="time" ng-model="time" ng-pattern="/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/" required>
+                                <span class="error-message" ng-show="taskForm.time.$touched && taskForm.time.$error.required">Время обязательно</span>
+                                <span class="error-message" ng-show="taskForm.time.$touched && taskForm.time.$error.pattern">Время должно быть в формате формате чч:мм</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-newcolor" ng-click="createNewTask()" ng-disabled="!isTaskDataValid">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <span ng-show="!!error" class="error-message">{{ error }}</span>
+                        <span ng-show="!!taskSuccess" class="success-modern">{{ taskSuccess }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</body>
+</html>

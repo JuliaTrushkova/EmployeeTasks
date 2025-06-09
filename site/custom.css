@@ -1,0 +1,42 @@
+﻿.table-width {
+    padding: 9rem;
+}
+
+.btn-newcolor {
+    --bs-btn-bg: #6092dc !important;
+    --bs-btn-border-color: #ffffff !important;
+    --bs-btn-hover-bg: #497dca !important;
+    --bs-btn-hover-border-color: #497dca !important;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.btn-newcolor {
+    min-width: 120px;
+    --bs-btn-bg: #497dca !important;
+    --bs-btn-border-color: #ffffff !important;
+    --bs-btn-hover-bg: #3562a5 !important;
+    --bs-btn-hover-border-color: #3562a5 !important;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.success-modern {
+    color: #28a745;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
