@@ -6,7 +6,7 @@ using System.Data.Entity;
 namespace EmployeeTasksLib.App_Code.Infrastructure
 {
     /// <summary>
-    /// Summary description for EmployeeTasksDbContext
+    /// Создание EmployeeTasksDbContext
     /// </summary>
     public class EmployeeTasksDbContext : DbContext, IEmployeeTasksDbContext
     {

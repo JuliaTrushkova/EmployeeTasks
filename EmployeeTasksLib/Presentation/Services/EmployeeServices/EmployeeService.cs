@@ -4,7 +4,6 @@ using EmployeeTasksLib.Presentation.Exceptions;
 using EmployeeTasksLib.Presentation.Models;
 using System;
 using System.ServiceModel;
-using System.ServiceModel.Web;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,6 +15,9 @@ namespace EmployeeTasksLib.App_Code.Presentation.Services.EmployeeServices
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class EmployeeService : IEmployeeService
     {
+        /// <summary>
+        /// Контроллер для работы с сотрудниками
+        /// </summary>
         private IEmployeeController _employeeController;
 
         public EmployeeService(IEmployeeController employeeController)
@@ -23,6 +25,11 @@ namespace EmployeeTasksLib.App_Code.Presentation.Services.EmployeeServices
             _employeeController = employeeController;
         }
 
+        /// <summary>
+        /// Метод входа в систему
+        /// </summary>
+        /// <param name="logindata"></param>
+        /// <returns></returns>
         public async Task<WcfResult<LoginOutputDto>> LoginAsync(LoginDto logindata)
         {
             try
@@ -46,6 +53,11 @@ namespace EmployeeTasksLib.App_Code.Presentation.Services.EmployeeServices
             }            
         }
 
+        /// <summary>
+        /// Метод регистрации нового сотрудника
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public async Task<WcfResult<string>> RegisterAsync(EmployeeCreateDto employee)
         {
             try

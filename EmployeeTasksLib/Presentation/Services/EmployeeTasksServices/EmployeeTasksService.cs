@@ -18,6 +18,9 @@ namespace EmployeeTasksLib.App_Code.Presentation.Services.EmployeeTasksServices
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class EmployeeTasksService : IEmployeeTasksService
     {
+        /// <summary>
+        /// Контроллер для работы с задачами сотрудников
+        /// </summary>
         private IEmployeeTaskController _taskController;
 
         public EmployeeTasksService(IEmployeeTaskController taskController)
@@ -82,6 +85,11 @@ namespace EmployeeTasksLib.App_Code.Presentation.Services.EmployeeTasksServices
             }
         }
 
+        /// <summary>
+        /// Проверка корректности данных задачи сотрудника
+        /// </summary>
+        /// <param name="employeeTask"></param>
+        /// <exception cref="WebFaultException{string}"></exception>
         private static void CheckTaskDto(EmployeeTaskCreateDto employeeTask)
         {
             if (DateTime.TryParseExact(employeeTask.DateCompleted, "dd.MM.yyyy",

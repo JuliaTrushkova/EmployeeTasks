@@ -6,6 +6,9 @@ using System.ServiceModel;
 
 namespace EmployeeTasksLib.Presentation.Configuration
 {
+    /// <summary>
+    /// Добавление CORS поведения в WCF сервис
+    /// </summary>
     public class CorsBehavior : IServiceBehavior
     {
         public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase,

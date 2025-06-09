@@ -25,6 +25,10 @@ namespace EmployeeTasksLib.App_Code.Infrastructure.Interface
         /// </summary>
         DbSet<Person> Person { get; set; }
 
+        /// <summary>
+        /// Сохранение изменений в базе данных
+        /// </summary>
+        /// <returns></returns>
         Task<int> SaveChangesAsync();
     }
 }

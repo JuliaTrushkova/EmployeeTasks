@@ -7,8 +7,18 @@ using System.Linq;
 
 namespace EmployeeTasksLib.Presentation.Configuration
 {
+    /// <summary>
+    /// Инспектор сообщений для обработки CORS запросов в WCF сервисе
+    /// </summary>
     public class CorsMessageInspector : IDispatchMessageInspector
     {
+        /// <summary>
+        /// Добавление заголовков CORS в ответ на preflight OPTIONS запросы
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="channel"></param>
+        /// <param name="instanceContext"></param>
+        /// <returns></returns>
         public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
         {
             // Обработка preflight OPTIONS запросов
@@ -35,6 +45,11 @@ namespace EmployeeTasksLib.Presentation.Configuration
             return null;
         }
 
+        /// <summary>
+        /// Добавление заголовков CORS в ответ на запросы
+        /// </summary>
+        /// <param name="reply"></param>
+        /// <param name="correlationState"></param>
         public void BeforeSendReply(ref Message reply, object correlationState)
         {   
             var responseProperty = reply.Properties[HttpResponseMessageProperty.Name] as HttpResponseMessageProperty;

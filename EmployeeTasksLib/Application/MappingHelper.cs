@@ -55,7 +55,7 @@ namespace EmployeeTasksLib.App_Code.Application
         /// <summary>
         /// Маппинг доменной модели сотрудника в модель Dto логина
         /// </summary>
-        /// <param name="employeeTask"></param>
+        /// <param name="employee"></param>
         /// <returns></returns>
         public static LoginOutputDto MapEmployeeLoginFromDomToDto(Employee employee)
         {
@@ -86,7 +86,7 @@ namespace EmployeeTasksLib.App_Code.Application
         /// <summary>
         /// Маппинг доменной модели списка задач сотрудника в модель Dto
         /// </summary>
-        /// <param name="employeeTask"></param>
+        /// <param name="employeeTasks"></param>
         /// <returns></returns>
         public static EmployeeTaskListDto MapEmployeeTaskListFromDomToDto(List<EmployeeTask> employeeTasks)
         {
